@@ -60,6 +60,7 @@ if __name__ == "__main__":
         carro1.desligar()
     if carro2.motor_on:
         carro2.desligar()
+
     print(carro1)
     print(carro2)
 
