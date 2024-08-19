@@ -51,8 +51,3 @@ class Carro:
                 f'consumo {self.consumo_medio} km/L\n'
                 f'nivel do tanque {self.tanque} L')
         return info
-
-
-
-
-
