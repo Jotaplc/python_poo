@@ -3,6 +3,7 @@ import traceback
 
 from common import *
 
+FILE_CANDIDATOS = 'candidatos.pkl'
 FILE_ELEITORES = 'eleitores.pkl'
 
 def menu_eleitor():
@@ -54,6 +55,29 @@ def atualizar_eleitor(eleitores):
     else:
         raise Exception('Titulo inexistente')
 
+def inserir_candidato(candidatos):
+    numero = int(input("Digite o número do candidato: "))
+
+    if numero in candidatos:
+        raise Exception(f"Candidato com o numero {numero} já existe")
+
+    nome = input("digite o nome: ")
+    RG = input("digite o RG")
+    CPF = input("digite o CPF")
+
+    candidato = Candidato(nome, RG, CPF, numero)
+    candidatos[numero] = candidato
+
+    with open(FILE_CANDIDATOS, 'wb',) as arquivo:
+        pickle.dump(candidatos, arquivo)
+
+    print(candidato)
+    print("Candidato salvo com sucesso")
+
+def listar_candidatos(candidatos):
+    for c in candidatos.values():
+        print(c)
+
 if __name__ == "__main__":
     eleitores = {} #dicionário a chave será o titulo
     try:
@@ -68,15 +92,30 @@ if __name__ == "__main__":
     opcao = 1
     while opcao in (1,2,3):
         try:
-            opcao = menu_eleitor()
+            op_user = "0"
+            while op_user not in (1,2):
+                op_user = input("1 - Gerenciar eleitores\n"
+                                "2 - Gerenciar candidatos")
+            if op_user == "1":
+                opcao = menu_eleitor()
 
-            if opcao == 1:
-                inserir_eleitor(eleitores)
-            elif opcao == 2:
-                atualizar_eleitor(eleitores)
-            elif opcao == 3:
-                print("Saindo!")
-                break
+                if opcao == 1:
+                    inserir_eleitor(eleitores)
+                elif opcao == 2:
+                    atualizar_eleitor(eleitores)
+                elif opcao == 3:
+                    print("Saindo!")
+                    break
+            else:
+                opcao = menu_candidato()
+                if opcao == 1:
+                    inserir_candidato(candidatos)
+                elif opcao == 2:
+                    listar_candidatos(candidatos)
+                elif opcao == 3:
+                    print("Saindo!")
+                    break
+
         except Exception as e:
             #traceback.print_exc()
             print(e)
