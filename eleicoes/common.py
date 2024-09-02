@@ -18,9 +18,9 @@ class Pessoa:
         return f"Pessoa(nome='{self.__nome}', RG='{self.__RG}', CPF='{self.__CPF}')"
 
 class Eleitor(Pessoa):
-    __titulo : int
-    secao : int
-    zona : int
+    __titulo: int
+    secao: int
+    zona: int
 
     def __init__(self, nome, RG, CPF, titulo, secao, zona):
         super().__init__(nome, RG, CPF)
