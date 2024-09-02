@@ -1,18 +1,22 @@
 import pickle
 import traceback
-
+import gerenciar_urna
 from common import *
 
 FILE_CANDIDATOS = 'candidatos.pkl'
 FILE_ELEITORES = 'eleitores.pkl'
 
-def menu_eleitor():
+def menu():
     print("1-Novo Eleitor")
     print("2-Atualizar Eleitor")
-    print("3-Sair")
-    op = int(input("Digite a opcao [1,2,3]? "))
-    while op not in (1, 2, 3):
-        op = int(input("Digite a opcao [1,2,3]? "))
+    print("3-Inserir Candidato")
+    print("4-Listar Candidatos")
+    print("5-Iniciar Urna")
+    print("6-Testar Urna")
+    print("7-Sair")
+    op = int(input("Digite a opcao [1 a 7]? "))
+    while op not in range(1, 8):
+        op = int(input("Digite a opcao [1 a 7]? "))
     return op
 
 def inserir_eleitor(eleitores):

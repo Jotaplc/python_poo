@@ -51,5 +51,8 @@ class Candidato(Pessoa):
         info = super().__str__()
         info += f'numero = {self.__numero}'
 
+    def __repr__(self):
+        return f"Candidato({super().__repr__()}, numero='{self.__numero})'"
+
     def get_numero(self):
         return self.__numero
